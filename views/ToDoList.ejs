@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+
+    <link rel="icon" type="image/png" href="/images/icon.png">
+
+    <!-- fontawesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <!-- bootstrap css  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="bg-light">
+
+    <!-- top heading  -->
+    <div class="container top-heading mt-5">
+        <h1 class="heading">
+            <i class="fab fa-tumblr"></i><i class="fab fa-dochub"></i> T0D0 APP
+        </h1>
+    </div>
+
+    <!-- create form container -->
+
+    <div class="container create-todo-container">
+        <form action="/create-todo" method="post">
+
+
+            <div class="container mt-5 mb-4">
+                <div class="desc-box">
+                    <input type="text" name="description" placeholder="" required>
+                    <label>DESCRIPTION</label>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row category-date">
+                    <div class="col">
+                        <div class="input-group mb-3 mt-4">
+                            <label class="input-group-text" for="category">CATEGORY</label>
+                            <select class="form-select" id="inputGroupSelect01" name="category" id="" required>
+                                <option value="">Choose a Category</option>
+                                <option value="PERSONAL">PERSONAL</option>
+                                <option value="WORK">WORK</option>
+                                <option value="SCHOOL">SCHOOL</option>
+                                <option value="CLEANING">CLEANING</option>
+                                <option value="OTHER">OTHER</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3 mt-4">
+                            <span class="input-group-text" id="inputGroup-sizing-default">SELECT DATE</span>
+                            <input class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default" type="date" name="date" id="" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container text-center mt-4 add-container center-align">
+                <button class="noselect" type="submit" id="add">
+                    <span class='text'>Add ToDo</span>
+                    <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path
+                                d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+                        </svg>
+                    </span>
+                </button>
+            </div>
+
+
+
+        </form>
+    </div>
+
+    <!-- display table container -->
+
+    <div class="container text-center mt-5">
+        <h2 class="heading-2">
+            ToDoS LIST
+            <small class="text-muted">Tasks to be done</small>
+        </h2>
+
+        <form action="/delete-todo" method="get" class="mt-4">
+
+            <table class="table table-success table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Select</th>
+                        <th scope="col">Todo</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">due-date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i of todo) { %>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="<%= i.id %>">
+                            </td>
+                            <td>
+                                <p id="task-desc">
+                                    <%= i.description %>
+                                </p>
+                            </td>
+                            <td>
+                                <p id="task-category" class="btn category-btn">
+                                    <%= i.category %>
+                                </p>
+                            </td>
+                            <td>
+                                <p id="due-date">
+                                    <%= i.date %>
+                                </p>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+
+            <div class="center-align delete-container" style="align-items: center; justify-content: center;">
+                <button type="submit" class="noselect mb-5 mt-3">
+                    <span class='text'>Delete</span>
+                    <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path
+                                d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+                        </svg>
+                    </span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <!-- SOCIAL PANEL HTML -->
+        <div class="social-container">
+            <div class="social">
+                <p>Made by
+                    <a href="#">Deepanshi Soni</a>
+                </p>
+                <button class="close-btn"><i class="fas fa-times-circle"></i></button>
+                <h4>Contact me</h4>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/deepanshi-soni-151978192/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <button class="contact-btn">
+            Contact me
+        </button>
+    </footer>
+    </footer>
+
+
+
+
+    <!-- bootstrap js  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+
+    <!-- js for description-box animation and footer -->
+    <script src="scrip.js"></script>
+</body>
+
+</html>

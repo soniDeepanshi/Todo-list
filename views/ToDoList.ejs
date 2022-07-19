@@ -129,7 +129,7 @@
                             </td>
                             <td>
                                 <p id="due-date">
-                                    <%= i.date %>
+                                    <%= i.date.toISOString().slice(0, 10) %>
                                 </p>
                             </td>
                         </tr>
